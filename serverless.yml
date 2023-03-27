@@ -1,12 +1,10 @@
 service: serverless-test
-frameworkVersion: "2"
+frameworkVersion: "3"
 useDotenv: true
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  stage: development
-  lambdaHashingVersion: '20201221'
+  runtime: nodejs16.x
   region: ap-southeast-2
   timeout: 900
   environment:
@@ -21,4 +19,8 @@ plugins:
 functions:
   weatherApi:
     handler: src/handlers/weather.handler
-    
+    events:
+      - httpApi:
+          path: /
+          method: post
+

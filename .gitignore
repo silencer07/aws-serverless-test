@@ -36,3 +36,5 @@ build/
 
 # serverless deploy files
 .serverless
+
+.yarn/

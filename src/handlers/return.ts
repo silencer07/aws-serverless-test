@@ -6,6 +6,6 @@ export const returnResponse = (responseObject: any): APIGatewayProxyResult => {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': true,
     },
-    body: responseObject,
+    body: JSON.stringify(responseObject),
     };
 };
