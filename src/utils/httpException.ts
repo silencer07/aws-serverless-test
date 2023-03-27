@@ -7,4 +7,11 @@ export class HttpException extends Error {
         this.message = message
         this.statusCode = statusCode
     }
+
+    public toJSON() {
+      return {
+        message: this.message,
+        statusCode: this.statusCode
+      }
+    }
 }

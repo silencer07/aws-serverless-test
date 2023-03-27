@@ -28,6 +28,6 @@ export const getWeather = async (payload: WeatherRequest): Promise<WeatherRespon
 
     return response
   } catch (e) {
-    throw new Error("An error occurred while submitting request to weather API")
+    throw new Error(e.message)
   }
 };
