@@ -1,6 +1,6 @@
-import {WeatherRequest, WeatherResponse} from "../@types/weather";
+import {WeatherRequest, WeatherResponse, VisualCrossingResponse} from "../@types";
 import axios, {AxiosResponse} from "axios"
-import {VisualCrossingResponse} from "../@types/visual-crossing";
+import {fahrenheitToKelvin} from "../utils";
 
 export const getWeather = async (payload: WeatherRequest): Promise<WeatherResponse> => {
   try {
@@ -10,15 +10,18 @@ export const getWeather = async (payload: WeatherRequest): Promise<WeatherRespon
 
     const weatherData: VisualCrossingResponse = weatherResponse.data
     const today = weatherData.days[0]
+    // TODO convert to kelvin
     const response: WeatherResponse = {
       lon: weatherData.longitude,
       lat: weatherData.latitude,
       main: today.conditions,
       description: today.description,
-      temp: today.temp,
-      feels_like: today.feelslike,
-      temp_min: today.tempmin,
-      temp_max: today.tempmax,
+
+      temp: fahrenheitToKelvin(today.temp),
+      feels_like: fahrenheitToKelvin(today.feelslike),
+      temp_min: fahrenheitToKelvin(today.tempmin),
+      temp_max: fahrenheitToKelvin(today.tempmax),
+
       pressure: today.pressure,
       humidity: today.humidity,
     }
